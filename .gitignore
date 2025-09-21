@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+*.pyc
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.env
+.venv
+pyvenv.cfg
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.project
+.pydevproject
+.settings
+
+# Project specific
+results/
+credentials/
+*.log
+!final_corrected_v3_sbi_codes.json
+!industry_codes.json
+
+# Firebase
+serviceAccountKey.json
+firebase-debug.log
+.firebase/
+
+# OS specific
+.DS_Store
+Thumbs.db
