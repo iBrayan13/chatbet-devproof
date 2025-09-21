@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  chatbet:
+    build: .
+    container_name: chatbet
+    ports:
+      - "8501:8501"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - CHATBET_BASE_URL=${CHATBET_BASE_URL}
+    restart: unless-stopped
