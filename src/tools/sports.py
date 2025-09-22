@@ -18,14 +18,14 @@ chatbet_service = ChatBetMockService(settings=settings)
 
 @tool(
     "get_sports",
-    description="Get all sports data.",
+    description="Get all sports data. Extract the sport id from the response to use in other tools.",
 )
 def get_all_sports() -> List[Sport]:
     return chatbet_service.get_sports()
 
 @tool(
     "get_tournaments_by_sport_id",
-    description="Get all tournaments by sport id.",
+    description="Get all tournaments by sport id (Sport ID is extracted from the get_sports tool).",
     args_schema=GetTournamentsArgs
 )
 def get_tournaments_by_sport_id(sport_id: str) -> List[TournamentBySport]:
@@ -33,7 +33,7 @@ def get_tournaments_by_sport_id(sport_id: str) -> List[TournamentBySport]:
 
 @tool(
     "get_fixtures_by_tournament_id",
-    description="Get all fixtures by tournament id.",
+    description="Get all fixtures by tournament id (Tournament ID is extracted from the get_tournaments_by_sport_id tool). Extract the fixture id from the response to use in the get_odds tool.",
     args_schema=GetFixturesByTournamentArgs
 )
 def get_fixtures_by_tournament_id(tournament_id: str) -> List[Fixture]:
@@ -41,7 +41,7 @@ def get_fixtures_by_tournament_id(tournament_id: str) -> List[Fixture]:
 
 @tool(
     "get_fixtures_by_sport_id",
-    description="Get all fixtures by sport id.",
+    description="Get all fixtures by sport id (Sport ID is extracted from the get_sports tool). Extract the fixture id from the response to use in the get_odds tool.",
     args_schema=GetFixturesBySportArgs
 )
 def get_fixtures_by_sport_id(sport_id: str) -> List[FixtureBySport]:
@@ -49,7 +49,7 @@ def get_fixtures_by_sport_id(sport_id: str) -> List[FixtureBySport]:
 
 @tool(
     "get_odds",
-    description="Get all odds by fixture id.",
+    description="Get all odds by fixture id, sport id and tournament id (Fixture ID, Sport ID and Tournament ID are extracted from the get_fixtures_by_sport_id tool or get_fixtures_by_tournament_id tool). Extract the odd from the response to use in the bet tool.",
     args_schema=GetOddsArgs
 )
 def get_odds(sport_id: str, tournament_id: str, fixture_id: str):
@@ -59,5 +59,11 @@ def get_odds(sport_id: str, tournament_id: str, fixture_id: str):
 class SportsToolkit(BaseToolkit):
 
     def get_tools(self) -> List[BaseTool]:
-        return [get_all_sports, get_tournaments_by_sport_id, get_fixtures_by_tournament_id]
+        return [
+            get_all_sports,
+            get_tournaments_by_sport_id,
+            get_fixtures_by_tournament_id,
+            get_fixtures_by_sport_id,
+            get_odds
+        ]
     

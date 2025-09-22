@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 
 # Sports-related tool schemas
 class GetTournamentsArgs(BaseModel):
-    sport_id: str = Field(..., description="The ID of the sport to get tournaments for.")
+    sport_id: int = Field(..., description="The ID of the sport to get tournaments for.")
 
 class GetFixturesByTournamentArgs(BaseModel):
     tournament_id: str = Field(..., description="The ID of the tournament to get fixtures for.")
