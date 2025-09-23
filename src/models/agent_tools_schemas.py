@@ -18,9 +18,6 @@ class GetOddsArgs(BaseModel):
 
 # Bet-related tool schema
 class PlaceBetArgs(BaseModel):
-    user_id: str = Field(..., description="The ID of the user placing the bet.")
-    user_key: str = Field(..., description="The authentication key of the user.")
-    token: str = Field(..., description="The session token of the user.")
     bet_amount: float = Field(..., description="The amount of money to bet.")
     bet_id: str = Field(..., description="The ID of the bet to place.")
     fixture_id: str = Field(..., description="The ID of the fixture to place a bet on.")

@@ -72,7 +72,7 @@ class ChatBetMockService:
     @handle_exceptions(default_return=None, model_validate="UserBalance")
     def _get_user_balance(self, user_id: int, user_key: str, token: str) -> Optional[UserBalance]:
         response = requests.get(
-            url=f"{self.base_url}/user/get_balance",
+            url=f"{self.base_url}/auth/get_user_balance",
             params={
                 "userId": user_id,
                 "userKey": user_key
@@ -208,3 +208,5 @@ class ChatBetMockService:
         
         return False
         
+
+session_data = ChatBetMockService(Settings()).auth_new_session()
